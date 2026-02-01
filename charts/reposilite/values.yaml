@@ -77,7 +77,6 @@ deployment:
 ## Service configuration
 service:
   type: ClusterIP
-  port: 8080
   annotations: {}
 
 ## HorizontalPodAutoscaler configuration.
@@ -85,6 +84,10 @@ autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 10
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
   metrics:
     - type: Resource
       resource:
