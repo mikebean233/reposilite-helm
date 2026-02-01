@@ -11,12 +11,11 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: 8080
+    {{- range .ports }}
+    - name: {{ $name }}
+      port: {{ $port }}
       protocol: TCP
-      name: https
-      {{- if (and (contains "NodePort" .Values.service.type) (not (empty .Values.service.nodePort))) }}
-      nodePort: {{ .Values.service.nodePort }}
-      {{- end }}
+      targetPort: {{ $targetPort }}
+    {{- end }}      
   selector:
     {{- include "reposilite.selectorLabels" . | nindent 4 }}
