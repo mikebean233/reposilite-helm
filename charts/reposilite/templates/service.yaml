@@ -11,7 +11,7 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    {{- range .ports }}
+    {{- range .Values.service.ports }}
     - name: {{ $name }}
       port: {{ $port }}
       protocol: TCP
