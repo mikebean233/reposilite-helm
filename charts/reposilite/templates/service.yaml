@@ -12,10 +12,10 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     {{- range .Values.service.ports }}
-    - name: {{ $name }}
-      port: {{ $port }}
+    - name: {{ .name }}
+      port: {{ .port }}
       protocol: TCP
-      targetPort: {{ $targetPort }}
+      targetPort: {{ .targetPort }}
     {{- end }}      
   selector:
     {{- include "reposilite.selectorLabels" . | nindent 4 }}
